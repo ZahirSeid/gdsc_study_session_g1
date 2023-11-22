@@ -9,49 +9,47 @@ def add_student():
     age = input("Enter the student's age: ")
     grade = input("Enter the student's grade: ")
     StudentID = input("Enter your student ID: ")
-    database[name] = {'Age': age, 'Grade': grade, 'StudentID': StudentID}
+    database[name] = [age, grade, StudentID]
     print(f"{name} has been added to the database.")
 
 def view_student():
     name = input("Enter the student's name: ")
-    if name in database:
+    global info
+    info = ["Age", "Grade", "StudentID"]
+    if name in database.keys():
         print(f"Name: {name}")
-        print(f"Age: {database[name]['age']}")
-        print(f"Grade: {database[name]['grade']}")
-        print(f"StudentID: {database[name]['StudentID']}")
-        
+        for i in range(len(info)):
+            print(f'Your {info[i]}: {database[name][i]}')
     else:
         print(f"{name} is not in the database.")
-        print("Please register")
         option = input("do you want to register ? (Y/N): ")
         if option.upper() == "Y":
             add_student()
         else:
-            exit
+            exit()
 
 def list_students():
-    for name in database:
+    for name in database.keys():
         print(f"Name: {name}")
-        print(f"Age: {database[name]['age']}")
-        print(f"Grade: {database[name]['grade']}")
-        print(f"StudentID: {database[name]['StudentID']}")
-        print()
+        for i in range(len(info)):
+            print(f'{info[i]}: {database[name][i]}')
 
 def update_student():
     name = input("Enter the student's name: ")
     if name in database:
         age = input("Enter the student's new age: ")
         grade = input("Enter the student's new grade: ")
-        database[name]['age'] = age
-        database[name]['grade'] = grade
-        database[name]['StudentID'] = StudentID
+        StudentID = input("Enter the student's new ID: ")
+        database[name][0] = age
+        database[name][1] = grade
+        database[name][2] = StudentID
         print(f"{name}'s information has been updated.")
     else:
         print(f"{name} is not in the database.")
 
 def delete_student():
     name = input("Enter the student's name: ")
-    if name in database:
+    if name in database.keys():
         del database[name]
         print(f"{name} has been deleted from the database.")
     else:
