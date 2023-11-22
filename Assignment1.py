@@ -56,8 +56,7 @@ def delete_student():
         print(f"{name} has been deleted from the database.")
     else:
         print(f"{name} is not in the database.")
-
-def main():
+while True:
     print("What would you like to do?")
     print("1. Add a student")
     print("2. View a student")
@@ -77,8 +76,6 @@ def main():
     elif choice == '5':
         delete_student()
     elif choice == '6':
-        exit()
+        break
     else:
         print("Invalid choice. Please try again.")
-if __name__ == "__main__":
-    main()
